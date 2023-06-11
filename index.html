@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont,
+            "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+            "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+
+    }
+
+    .contner {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgb(61, 58, 57);
+        max-width: 450px;
+        border-radius: 9px;
+        opacity: 0.6;
+
+
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 150px;
+    }
+
+    .unit {
+        margin-top: 15px;
+        padding: 9px;
+    }
+
+    .btn {
+        background-color: #522c7e;
+        color: #fff;
+        border-radius: 5px;
+        max-width: 150px;
+        max-height: 190px;
+        margin-left: 130px;
+        box-shadow: #0b0b0b 5px 5px 10px 4px;
+        font-size: 20px;
+        
+    }
+
+    .head {
+        background-color: #522c7e;
+        color: #fff;
+        min-height: 50px;
+        padding-left: 50px;
+        padding-top: 9px;
+        letter-spacing: 6px;
+        font-size: bold;
+        margin-top: 10px;
+        
+    }
+    .video{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index:-1 ;
+    }
+    #value{
+        color: #f3eaea;
+        font-size: 20px;
+    
+    }
+    @media (min-aspect-ratio: 16/9){
+        .video{
+            width: 100%;
+            height: auto;
+        }
+    }
+    @media (max-aspect-ratio: 16/9){
+        .video{
+            width: auto;
+            height: 100%;
+        }
+    }
+
+
+</style>
+
+<body>
+    <video class="video" autoplay muted loop src="video.mp4" ></video>
+    <form class="box">
+        <div class="contner">
+            <h2 class="head" id="head"> UNIT CONVERTER</h2>
+            <lable class="unit">
+                <span id="value"> enter the value *</span>
+                <input type="text" placeholder="enter the value.." id="input">
+                <select class="vlaue" id="inputtype">
+                    <option value="meter">meter</option>
+                    <option value="kilometer">"kilometer"</option>
+                    <option value="centimeter">centimeter</option>
+                    <option value="Fahrenheit"> Fahrenheit</option>
+                   
+                </select><br></br>
+
+                <label id="value">Choose Conversion Value *</label>
+                <select id="resultype">
+                    <option value="meter">meter</option>
+                    <option value="kilometer">kilometer</option>
+                    <option value="centimeter">centimeter</option>
+                    <option value="Celcius">Celcius</option>
+                    <option value="kelvin">kelvin</option>
+
+                </select>
+            </lable>
+            <lable class="unit">
+                <span id="value"> result*</span>
+                <input type="text" id="result" placeholder="result..">
+            </lable><br>
+            <input type="reset" value="reset" class="btn" >
+            
+
+        </div>
+    </form>
+    <script>
+        var input = document.getElementById('input');
+        var result = document.getElementById('result');
+        var inputtype = document.getElementById('inputtype');
+        var resultype = document.getElementById('resultype');
+        var inputtypevalue, resulttypevalue;
+
+        input.addEventListener("keyup", myresult);
+        inputtype.addEventListener("change", myresult);
+        resultype.addEventListener("change", myresult);
+
+        inputtypevalue = inputtype.value;
+        resulttypevalue = resultype.value;
+
+
+        function myresult() {
+
+            inputtypevalue = inputtype.value;
+            resulttypevalue = resultype.value;
+
+            if (inputtypevalue === "meter" && resulttypevalue === "centimeter") {
+                result.value = (input.value) * 100
+            }
+            else if (inputtypevalue === "meter" && resulttypevalue === "kilometer") {
+                result.value = (input.value) * 0.001;
+            }
+            else if (inputtypevalue === "meter" && resulttypevalue === "meter") {
+                result.value = input.value;
+
+            }
+
+
+
+
+            if (inputtypevalue === "kilometer" && resulttypevalue === "meter") {
+                result.value = (input.value) * 1000;
+            }
+
+            else if (inputtypevalue === "kilometer" && resulttypevalue === "centimeter") {
+                result.value = (input.value) * 100000;
+            }
+            else if (inputtypevalue === "kilometer" && resulttypevalue === "kilometer") {
+                result.value = input.value;
+            }
+
+
+
+            if (inputtypevalue === "centimeter" && resulttypevalue === "kilometer") {
+                result.value = (input.value) * 1000
+            }
+            else if (inputtypevalue === "centimeter" && resulttypevalue === "meter") {
+                result.value = (input.value) * 100000;
+            }
+            else if (inputtypevalue === "centimeter" && resulttypevalue === "centimeter") {
+                result.value = input.value;
+            }
+
+
+
+            if (inputtypevalue ===  "Fahrenheit"   && resulttypevalue ===  "Celcius"){
+                result.value =(input.value-32)/1.8;
+            }
+            else if (inputtypevalue === "Fahrenheit" && resulttypevalue === "kelvin") {
+                result.value =(input.value-32)/1.8+273.15;
+            }
+
+
+        }
+    </script>
+   
+</body>
+
+
+</html>
